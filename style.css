@@ -1,0 +1,636 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url(images/mc-wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+/*  dodawnie klasy do body po wygranej zmienia bck-color */
+body.win-the-game::after {
+    content: '';
+    display: block;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    z-index: 20;
+}
+/* rodzic w którym umiesiclem plansze, h1 , */
+.parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+h1 {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    /* color: #f71735; */
+    color: #800000;
+    letter-spacing: 1px;
+    font-size: 60px;
+    text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15)
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 50px;
+}
+
+.board div {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    position: relative;
+}
+
+.chesse {
+    background-image: url(images/chesse.png);
+}
+.cola {
+    background-image: url(images/cola.png);
+}
+.cupcake {
+    background-image: url(images/cupcake.png);
+}
+.fries {
+    background-image: url(images/fries.png);
+}
+.hamburger {
+    background-image: url(images/hamburger.png);
+}
+.icecream {
+    background-image: url(images/icecream.png);
+}
+.pancake {
+    background-image: url(images/pancake.png);
+}
+.pizza {
+    background-image: url(images/pizza.png);
+}
+div.hidden {
+    background-image: none;
+}
+/* div po odgadnieciu znika */
+div.off {
+   background-color: rgba(0,0,0,0.30);
+   pointer-events: none;
+   position: relative;
+   background-image: url(images/check1.png);
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+.board div {
+ border: white solid 1px;
+}
+/* background for pictures */
+.board div::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.10);
+}
+/* kontener z btn i timer */
+.timer-button {
+    display: flex;
+    justify-content: center;
+}
+/* start */
+button {
+    display: block;
+    width: 150px;
+    height: 60px;
+    background-color: #800000;
+    text-transform: uppercase;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color: #fff;
+    border-radius: 45px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    margin-right: 20px;
+}
+.timer {
+    width: 150px;
+    height: 60px;
+    background-color: #800000;
+    border-radius: 45px;
+    text-align: center;
+    box-shadow: 1px 3px 10px #000;
+}
+.timer span {
+    line-height: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:#fff;
+    font-size: 18px;
+}
+/* kontener punkty i ruchy */ 
+.moves-score {
+    display: flex;
+}
+.moves-score p{
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color:#fff;
+    text-align: center;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.score div {
+    width: 150px;
+    height: 60px;
+    background-color: #800000;
+    border-radius: 45px;
+    box-shadow: 1px 3px 10px #000;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 60px;
+    margin-right: 20px;
+}
+.score span {
+    color: #fff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+.score p {
+    margin-right: 20px;
+}
+.moves div{
+    width: 150px;
+    height: 60px;
+    background-color: #800000;
+    border-radius: 45px;
+    box-shadow: 1px 3px 10px #000;
+    text-align: center;
+    line-height: 60px;
+}
+/* punkty */
+.moves span {
+    color: #fff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+.win h2 {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    /* color: #f71735; */
+    color: #800000;
+    letter-spacing: 1px;
+    font-size: 30px;
+    text-shadow: 2px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15)
+}
+.win {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.win.on {
+    opacity: 1;
+    text-align: center;
+    z-index: 100;
+    transition: opacity .8s ease-in;
+}
+.win span {
+    font-size: 20px;
+}
+.win p {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color:#fff;
+    font-size: 20px;
+    padding-top: 20px;
+} 
+/* btn play-again  */
+.play-again {
+    display: block;
+    width: 170px;
+    height: 50px;
+    background-color: #800000;
+    text-transform: uppercase;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color: #fff;
+    border-radius: 45px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 40px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-between;
+    align-items: center;
+}
+/* koniec info  */
+
+
+/* MEDIAQUERIES*/
+
+@media (orientation: portrait) {
+    body {
+        flex-direction: column;
+    }
+    h1 {
+        text-align: center;
+        font-size: 35px;
+    }
+    .board div {
+        width: 65px;
+        height: 65px; 
+        margin: 2px;
+        background-size: cover;
+    }
+    button {
+        width: 100px;
+        font-size: .9em;
+        height: 50px;
+    }
+    .timer {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .timer span {
+        line-height: 50px;
+    }
+    .score div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .info {
+        justify-content: center;
+    }
+    .moves-score p {
+        padding-bottom: 3px;
+        font-size: .9em;
+    }
+    .win h2 {
+        font-size: 2.1em;
+    }
+    .win p {
+        font-size: 1.1em;
+    }
+    .play-again {
+        margin-right: 0px;
+        height: 50px;
+    }
+}
+@media (orientation: landscape) {
+    body {
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    h1 {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .board {
+        padding-top: 20px;
+        grid-template-columns: repeat(8, 1fr);
+    }
+    .board div {
+        width: 62px;
+        height: 62px; 
+        margin: 2px;
+        background-size: cover;
+    }
+    button {
+        width: 100px;
+        font-size: .9em;
+        height: 50px;
+    }
+    .timer {
+        width: 100px;
+        height: 50px;
+    }
+    .timer span {
+        line-height: 50px;
+    }
+    .score div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .info {
+        flex-direction: row;
+    }
+    .timer-button {
+        padding-top: 10px;
+        padding-right: 20px;
+    }
+    .moves-score p {
+        padding-bottom: 3px;
+        font-size: .8em;
+    }
+    .win h2 {
+        font-size: 2.1em;
+    }
+    .win p {
+        font-size: 1.1em;
+    }
+    .play-again {
+        margin-right: 0px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 320px) {
+    h1 {
+        font-size: 32px;
+    }
+    .board {
+        padding-top: 10px;
+    }
+    .board div {
+        width: 62px;
+        height: 62px; 
+        margin: 2px;
+    }
+    button {
+        width: 100px;
+        font-size: .9em;
+        height: 50px;
+    }
+    .timer {
+        width: 100px;
+        height: 50px;
+    }
+    .timer span {
+        line-height: 50px;
+    }
+    .score div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves-score p {
+        padding-bottom: 3px;
+        font-size: .8em;
+    }
+    .win h2 {
+        font-size: 1.9em;
+    }
+    .play-again {
+        height: 50px;
+    }
+}
+@media (min-width: 321px) and (max-width: 533px) {
+    h1 {
+        font-size: 2.1em;
+    }
+    .board {
+        padding: 20px 0;
+    }
+    .board div {
+        width: 75px;
+        height: 75px; 
+        margin: 2px;
+    }
+    button {
+        width: 100px;
+        font-size: .9em;
+        height: 50px;
+    }
+    .timer {
+        width: 100px;
+        height: 50px;
+    }
+    .timer span {
+        line-height: 50px;
+    }
+    .score div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves-score p {
+        padding: 10px 0;
+        font-size: .8em;
+    }
+}
+@media (min-width: 534px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    .board {
+        padding: 20x 0;
+    }
+    .board div {
+        width: 65px;
+        height: 65px; 
+        margin: 2px;
+    }
+    button {
+        width: 100px;
+        font-size: .9em;
+        height: 50px;
+    }
+    .timer {
+        width: 100px;
+        height: 50px;
+    }
+    .timer-button {
+        padding-top: 28px;
+    }
+    .timer span {
+        line-height: 50px;
+    }
+    .score div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves div {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .moves-score p {
+        padding: 10px 0;
+    }
+}
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.7em;
+        padding-top: 20px;
+    }
+    .board {
+        padding-top: 10px;
+        grid-template-columns: repeat(8, 1fr);
+        padding-bottom: 0px;
+    }
+    .board div {
+        width: 80px;
+        height: 80px; 
+        margin: 5px;
+    }
+    .win h2 {
+        font-size: 2.4em;
+    }
+}
+@media (min-width: 992px) {
+    body {
+        flex-direction: row;
+    }
+    h1 {
+        font-size: 2.9em;
+        padding-top: 20px;
+    }
+    .board {
+        padding-top: 30px;
+        padding-bottom: 0px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .board div {
+        width: 90px;
+        height: 90px; 
+        margin: 5px;
+    }
+    .board:hover {
+    cursor: pointer;
+    }
+    .info {
+        flex-direction: column;
+    }
+    .timer-button {
+        padding-right: 0px;
+    }
+    button {
+        width: 130px;
+        font-size: 1em;
+        height: 60px;
+    }
+    /* button:hover {
+    box-shadow: 0px 15px 20px #800000;
+    transform: translateY(-3px);
+    } */
+    .timer {
+        width: 130px;
+        height: 60px;
+    }
+    .timer span {
+        line-height: 60px;
+    }
+    .score div {
+        width: 130px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .moves div {
+        width: 130px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .moves-score p {
+        padding-bottom: 10px;
+        font-size: 1em;
+    }
+    .play-again {
+        width: 150px;
+        height: 60px;
+    }
+    .win h2 {
+        font-size: 2.5em;
+    }
+}
+@media (min-width: 1200px) {
+    body {
+        justify-content: center;
+    }
+    h1 {
+        font-size: 3.1em;
+        padding-top: 20px;
+    }
+    .board {
+        padding-top: 40px;
+        padding-bottom: 0px;
+    }
+    .board div {
+        width: 110px;
+        height: 110px; 
+        margin: 5px;
+    }
+    .info {
+        flex-direction: column;
+    }
+    .timer-button {
+        padding-right: 0px;
+    }
+    button {
+        width: 150px;
+        font-size: 1em;
+        height: 60px;
+    }
+    .timer {
+        width: 150px;
+        height: 60px;
+    }
+    .timer span {
+        line-height: 60px;
+    }
+    .score div {
+        width: 150px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .moves div {
+        width: 150px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .moves-score p {
+        padding-bottom: 10px;
+        font-size: 1em;
+    }
+    .info {
+        margin-left: 150px;
+    }
+    .win h2 {
+        font-size: 3.2em;
+    }
+}
+ 
+/* KONIEC */

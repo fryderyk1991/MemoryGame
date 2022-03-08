@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Memory game</title>
+</head>
+<body>
+    <div data-aos-delay="500" data-aos="fade-right" class="parent">
+    <h1>Memory game</h1>
+    <div class="board">
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+       <div class="hidden"></div>
+    </div>
+</div>
+<!-- div wyświetlający sie po wygranej grze -->
+<div class="win">
+    <h2>Congratulations !</h2>
+    <p>Your time is <span id="full-time"></span></p>
+    <p>The number of your moves is <span id="full-points"></span></p>
+    <button class="play-again">play again</button>
+</div>
+<div class="info" data-aos-delay="500" data-aos="fade-left">
+<div class="timer-button">
+<button class="start">start</button>
+<div class="timer"><span class="min">00</span><span>:</span><span class="sec">00</span></div>
+</div>
+<div class="moves-score">
+    <div class="score"><p>score</p><div class="points"><span>0</span></div></div>
+    <div class="moves"><p>moves</p><div class="clicked"><span>0</span></div></div>
+   </div>
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
